@@ -76,7 +76,7 @@ namespace Assignment_Session_1_LINQ
 
             #region LINQ - Element Operators
 
-            #region 1. Get first Product out of Stock 
+            #region Question 1 : Get first Product out of Stock 
 
             //Fluent Syntax 
             var Result = productsList.Where(P => P.UnitsInStock == 0).FirstOrDefault();
@@ -151,7 +151,7 @@ namespace Assignment_Session_1_LINQ
                           where P > 5
                           select P).ElementAtOrDefault(1);
 
-            //Console.WriteLine(Result); 
+            Console.WriteLine(Result); 
             //Output :
             // 8
 
@@ -182,7 +182,7 @@ namespace Assignment_Session_1_LINQ
                           select O).Count();
 
 
-            //Console.WriteLine(Result);
+            Console.WriteLine(Result);
 
             //Output : 
             //5
@@ -207,11 +207,35 @@ namespace Assignment_Session_1_LINQ
                              OrderCount = C.Orders.Count()
                          };
 
-            //foreach(var i in Result)
+            foreach(var i in Result)
             //    Console.WriteLine(i);
 
             #endregion
 
+                
+            #region Question 3 : Return a list of categories and how many products each has
+
+            //Fluent Syntax
+            var Result = productsList.Select(P => new
+                                            {
+                                                P.Category,
+                                                ProductCount = productsList.Count()
+                                            });
+                                                                      
+
+            //Query Syntax
+
+            var result = (from P in productsList
+                          select new
+                          {
+                              P.Category,
+                              ProductCount = productsList.Count()
+                          });
+
+            foreach (var i in Result)
+                Console.WriteLine(i);
+
+            #endregion
             #region Question 4 : Get the total of the numbers in an array.
 
             int[] Arr = { 5, 4, 1, 3, 9, 8, 6, 7, 2, 0 };
@@ -245,7 +269,7 @@ namespace Assignment_Session_1_LINQ
             var Result = (from E in EnglishDictionary
                           select E.Length).Sum();
 
-            //Console.WriteLine(Result);
+            Console.WriteLine(Result);
             //Output : 
             //3494688
 
@@ -262,7 +286,7 @@ namespace Assignment_Session_1_LINQ
                           select E.Length).Min();
 
 
-            // Console.WriteLine(Result);
+            Console.WriteLine(Result);
             //Output : 1
 
             #endregion
@@ -278,7 +302,7 @@ namespace Assignment_Session_1_LINQ
                           select E.Length).Max();
 
 
-            //Console.WriteLine(Result);
+            Console.WriteLine(Result);
             //Output : 31
             #endregion
 
@@ -293,7 +317,7 @@ namespace Assignment_Session_1_LINQ
                           select E.Length).Average();
 
 
-            //Console.WriteLine(Result);
+            Console.WriteLine(Result);
             //Output: 9.442576175563836
 
             #endregion
@@ -583,7 +607,7 @@ namespace Assignment_Session_1_LINQ
             var Result = Arr.Select((W, I) => $"{W} : {(W == I)}");
 
             ////Indexed select is valid only with Fluent Syntax , Can't be used with Query Syntax
-            ///
+        
             foreach (var item in Result)
                 Console.WriteLine(item);
 
@@ -602,7 +626,7 @@ namespace Assignment_Session_1_LINQ
             //0 : False
 
             #endregion
-            #region 5. Returns all pairs of numbers from both arrays such that the number from numbersA is less than the number from numbersB.
+            #region Question 5 : Returns all pairs of numbers from both arrays such that the number from numbersA is less than the number from numbersB.
 
             int[] numbersA = { 0, 2, 4, 5, 6, 8, 9 };
             int[] numbersB = { 1, 3, 5, 7, 8 };
